@@ -19,7 +19,7 @@ const crearVenta = async(req, res) => {
     
     const cantidadRestante = producto.cantidad - cantidadAVender
     
-    if(cantidadRestante > 0){
+    if(cantidadRestante >= 0){
         
         await Producto.update({
             cantidad: cantidadRestante
