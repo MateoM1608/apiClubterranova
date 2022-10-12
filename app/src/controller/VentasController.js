@@ -7,7 +7,7 @@ const moment = require('moment')
 //----------- Crear venta ----------
 
 const crearVenta = async(req, res) => {
-    const { usuario, cantidadAVender } = req.body;
+    const { usuario, cantidadAVender, metodoPago } = req.body;
     const { idProducto } = req.params;
     const momento =  moment().subtract(5, 'hours').format()
     
@@ -37,6 +37,7 @@ const crearVenta = async(req, res) => {
             precio_unitario: producto.precio,
             cantidad: cantidadAVender,
             precio_total: precioTotal,
+            metodo: metodoPago,
             fecha: momento,
             usuario: usuario
         })
@@ -51,13 +52,47 @@ const crearVenta = async(req, res) => {
 const eliminarVenta = async (req, res) => {
 
     const { ventaId } = req.params
+    try{
+        const venta = await Venta.findOne({
+            where:{
+                id: ventaId
+            }
+        })
     
-    Venta.destroy({
-        where:{
-            id:ventaId
+        let ventaJSON = JSON.parse(JSON.stringify(venta))
+    
+        const findProducto = await Producto.findOne({
+            where:{
+                nombre: ventaJSON.producto
+            }
+        })
+        const _findProducto = JSON.parse(JSON.stringify(findProducto));
+        
+        await Venta.destroy({
+            where:{
+                    id:ventaId
+            }
+        })
+    
+        if(_findProducto){
+            const numCantidad = Number(ventaJSON.cantidad)
+            const sumCantidad = _findProducto.cantidad + numCantidad
+            
+            await Producto.update({
+                cantidad: sumCantidad
+            },{
+                where: {
+                    id: _findProducto.id
+                }
+            })
+            return res.send('Se elimina correctamente la venta, se actualiza pruducto')
+            
         }
-    }).then(data => res.send('Venta eliminada correctamente'))
-    .catch(err => res.status(500).send(err))
+    
+        res.send('Se elimina correctamente la venta, sin producto para actualizar')
+    }catch(err){
+        res.send(err)
+    }
 }
 
 

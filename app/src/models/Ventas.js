@@ -10,7 +10,8 @@ module.exports = (Sequelize, type) => {
           precio_unitario: type.FLOAT,
           cantidad: type.FLOAT,
           precio_total: type.FLOAT,
+          metodo: type.TEXT,
           fecha: type.DATE,
-          usuario: type.TEXT
+          usuario: type.TEXT,
     })
 }
