@@ -68,9 +68,9 @@ const informeVentas = async(req, res) => {
 
     const { fechaInicio , fechaFinal } = req.body;
 
-    const fechaini = moment(fechaInicio).subtract(5, 'hours').format()
-    const fechafin = moment(fechaFinal).subtract(5, 'hours').format()
-
+    const fechaini = moment(fechaInicio).format()
+    const fechafin = moment(fechaFinal).format()
+    
 
     const informeVenta = await Venta.findAll({
         where:{
