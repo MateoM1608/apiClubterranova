@@ -12,7 +12,7 @@ const VentaModel = require('./models/Ventas')
 const ProductoModel = require('./models/Productos')
 const CategoriaModel = require('./models/Categorias')
 const UsuarioModel = require('./models/Usuarios')
-
+const BodaModel = require('./models/Bodas')
 
 //Definimos los parametros de conexion de la base de datos
 const sequelize = new Sequelize(`${DATABASE}`,`${DB_USER}`,`${DB_PASSWORD}`,{
@@ -35,6 +35,7 @@ const Venta = VentaModel(sequelize, Sequelize);
 const Producto = ProductoModel(sequelize, Sequelize);
 const Categoria = CategoriaModel(sequelize, Sequelize)
 const Usuario = UsuarioModel(sequelize, Sequelize)
+const Boda = BodaModel(sequelize, Sequelize)
 
 sequelize.sync({ force: false})
 .then(() => {
@@ -52,5 +53,6 @@ module.exports = {
   Venta,
   Producto,
   Categoria,
-  Usuario
+  Usuario,
+  Boda
 }
