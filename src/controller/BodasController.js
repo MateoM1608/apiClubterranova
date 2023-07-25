@@ -23,7 +23,8 @@ const importArchivo = async(req, res, next) => {
                 where: {
                     nombres: nombres,
                     invitados: invitados,
-                    asistiran: 0
+                    asistiran: 0,
+                    recepcion: 0
                 }
             })
         })
@@ -62,10 +63,11 @@ const consultarInvitado = async(req, res, next) => {
 
 const cambioAsistencia = async(req, res, next) => {
     try{
-        const { id, asistencia } = req.body
+        const { id, asistencia, recepcion } = req.body
 
         await Boda.update({
-            asistiran: asistencia
+            asistiran: asistencia,
+            recepcion: recepcion
         },{
             where: {
                 id: id

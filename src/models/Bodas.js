@@ -9,5 +9,6 @@ module.exports = (Sequelize, type) => {
         nombres: type.TEXT,
         invitados: type.FLOAT,
         asistiran: type.FLOAT,
+        recepcion: type.FLOAT,
     })
 }
