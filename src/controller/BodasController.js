@@ -38,7 +38,7 @@ const importArchivo = async(req, res, next) => {
 const consultarTodosAsistentes = async (req, res, next) => {
     try{
         const asistentes = await Boda.findAll({
-            attributes: ['id', 'nombres', 'invitados', 'asistiran'],
+            attributes: ['id', 'nombres', 'invitados', 'asistiran','recepcion'],
         })
         res.send(asistentes)
     }catch(err){
