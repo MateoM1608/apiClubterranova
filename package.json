@@ -7,7 +7,8 @@
     "start": "node index.js",
     "dev": "nodemon -L",
     "test": "mocha --recursive --timeout 10000 --exit",
-    "bash": "node ./src/utils/backend-bash.js"
+    "bash": "node ./src/utils/backend-bash.js",
+    "build": "[my-framework] build --output public"
   },
   "author": "Mateo Monsalve Medina",
   "license": "ISC",
